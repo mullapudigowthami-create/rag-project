@@ -1,0 +1,13 @@
+house_id,owner,trees_count,tree_types,tree_age_years,distance_from_house_meters,near_pole_or_cctv,country,land_type
+H001,Ramesh,3,"Neem,Teak,Banyan",12,10,No,India,Normal
+H002,Suresh,1,"Neem",5,8,No,India,Normal
+H003,Priya,5,"Neem,Peepal,Teak,Banyan,Neem",15,12,No,India,Normal
+H004,Vikram,2,"Teak,Peepal",3,6,Yes,India,Normal
+H005,John,4,"Neem,Banyan,Teak,Peepal",11,15,No,USA,Normal
+H006,Maria,0,"None",0,0,No,Brazil,Dry
+H007,Chen,2,"Teak,Neem",7,9,No,China,Normal
+H008,Lakshmi,3,"Banyan,Peepal,Neem",18,11,No,India,Normal
+H009,David,1,"Teak",2,5,Yes,UK,Normal
+H010,Fatima,4,"Neem,Banyan,Peepal,Teak",13,14,No,India,Normal
+H011,Carlos,3,"Neem,Teak,Banyan",10,10,No,Brazil,Dry
+H012,Sophie,2,"Peepal,Neem",11,12,No,France,Normal

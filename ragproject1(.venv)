@@ -1,0 +1,589 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "847fe701-d7a6-4990-99d7-74b70d043d25",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "ename": "NameError",
+     "evalue": "name 'os' is not defined",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[31m---------------------------------------------------------------------------\u001b[39m",
+      "\u001b[31mNameError\u001b[39m                                 Traceback (most recent call last)",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[1]\u001b[39m\u001b[32m, line 9\u001b[39m\n\u001b[32m      5\u001b[39m \n\u001b[32m      6\u001b[39m Settings.llm = Ollama(model=\u001b[33m\"mistral\"\u001b[39m, request_timeout=\u001b[32m120.0\u001b[39m)\n\u001b[32m      7\u001b[39m Settings.embed_model = OllamaEmbedding(model_name=\u001b[33m\"nomic-embed-text\"\u001b[39m)\n\u001b[32m      8\u001b[39m \n\u001b[32m----> \u001b[39m\u001b[32m9\u001b[39m os.makedirs(\u001b[33m\"data\"\u001b[39m, exist_ok=\u001b[38;5;28;01mTrue\u001b[39;00m)\n\u001b[32m     10\u001b[39m \n\u001b[32m     11\u001b[39m \u001b[38;5;28;01mwith\u001b[39;00m open(\u001b[33m\"data/sample.txt\"\u001b[39m, \u001b[33m\"w\"\u001b[39m) \u001b[38;5;28;01mas\u001b[39;00m f:\n\u001b[32m     12\u001b[39m     f.write(\u001b[33m\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\"\u001b[39m)\n",
+      "\u001b[31mNameError\u001b[39m: name 'os' is not defined"
+     ]
+    }
+   ],
+   "source": [
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)\n",
+    "resopnse = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a5ef26af-b93c-4728-843d-2733e8f866d6",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "!{sys.executable} -m pip install llama-index"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "27f80fed-fdb2-4351-898c-e448b663b3fb",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!{sys.executable} -m pip install llama-index-llms-ollama"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c81cc679-8ece-4e1e-b91d-1d03486d3ed4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)\n",
+    "resopnse = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9a7a9a4d-a765-4868-b4da-4a6ed0625aa1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!{sys.executable} -m pip install llama-index-index-embeddings-ollama"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "406f4fed-c9f5-4151-b2ab-ddcc58ca43ce",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!{sys.executable} -m pip install llama-index-embeddings-ollama."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "db0d379d-a6d5-4951-a293-79ac3fcbd907",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!{sys.executable} -m install llama-index-embeddings-ollama"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "85c64c41-0f9f-4c27-9b44-28b8e0c0f594",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "!{sys.executable} -m pip install llama-index-embeddings-ollama"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "38b7ce91-8611-4f35-bd49-ad1928c20dc9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)\n",
+    "resopnse = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a8703e92-dee7-4638-bf6b-3a13aa428406",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)\n",
+    "resopnse = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a2ec1fa3-a8cf-4881-8d12-800159f8ab96",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)\n",
+    "response = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "57e48e6d-f19b-4125-b576-e2f5b50220d0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response1 = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response1)\n",
+    "resopnse2 = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "56342c62-474a-44a2-a41f-56981c9a8849",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response 1 = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response 1)\n",
+    "resopnse 2 = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response 2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5547fdd2-32cd-4afd-a902-7bd7251f2e38",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "os.environ[\"GOOGLE_API_KEY\"] = \"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\"\n",
+    "from llama_index.core import VectorStoreIndex,SimpleDirectoryReader\n",
+    "from llama_index.llms.ollama import Ollama\n",
+    "from llama_index.embeddings.ollama import OllamaEmbedding\n",
+    "from llama_index.core import Settings\n",
+    "\n",
+    "Settings.llm = Ollama(model=\"mistral\", request_timeout=120.0)\n",
+    "Settings.embed_model = OllamaEmbedding(model_name=\"nomic-embed-text\")\n",
+    "\n",
+    "os.makedirs(\"data\", exist_ok=True)\n",
+    "\n",
+    "with open(\"data/sample.txt\", \"w\") as f:\n",
+    "    f.write(\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI. Python is the most popular language for AI development.\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "\n",
+    "query_engine = index.as_query_engine()\n",
+    "response1 = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response1)\n",
+    "resopnse2 = query_engine.query(\"What is AI transforming?\")\n",
+    "print(response2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7203dc29-aed7-4465-82d5-34de4a55f266",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "os.environ[\"GOOGLE_API_KEY\"] = \"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\"\n",
+    "\n",
+    "from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, Settings\n",
+    "from llama_index.llms.gemini import Gemini\n",
+    "from llama_index.embeddings.gemini import GeminiEmbedding\n",
+    "\n",
+    "Settings.llm = Gemini(model=\"models/gemini-1.5-flash\")\n",
+    "Settings.embed_model = GeminiEmbedding()\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "query_engine = index.as_query_engine()\n",
+    "\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "5e242072-5e12-4e4d-b88b-5e0ea4d1688c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "!{sys.executable} -m pip install llama-index-llms-gemini llama-index-embeddings-gemini"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c7083b03-2ea6-404d-b5ba-dfd20c47cc9c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "os.environ[\"GOOGLE_API_KEY\"] = \"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\"\n",
+    "\n",
+    "from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, Settings\n",
+    "from llama_index.llms.gemini import Gemini\n",
+    "from llama_index.embeddings.gemini import GeminiEmbedding\n",
+    "\n",
+    "Settings.llm = Gemini(model=\"models/gemini-1.5-flash\")\n",
+    "Settings.embed_model = GeminiEmbedding()\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "query_engine = index.as_query_engine()\n",
+    "\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "e96acb7d-dd7f-4df3-a659-7722d4889146",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "os.environ[\"GOOGLE_API_KEY\"] = \"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\"\n",
+    "\n",
+    "from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, Settings\n",
+    "from llama_index.llms.google_genai import GoogleGenAI\n",
+    "from llama_index.embeddings.google_genai import GoogleGenAIEmbedding\n",
+    "\n",
+    "Settings.llm = GoogleGenAI(model=\"gemini-1.5-flash\")\n",
+    "Settings.embed_model = GoogleGenAIEmbedding(model_name=\"models/text-embedding-004\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "query_engine = index.as_query_engine()\n",
+    "\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a4bb2c56-1286-41e6-8b60-6336b4630e76",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "os.environ[\"GOOGLE_API_KEY\"] = \"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\"\n",
+    "\n",
+    "from llama_index.core import SimpleDirectoryReader, VectorStoreIndex, Settings\n",
+    "from llama_index.llms.google_genai import GoogleGenAI\n",
+    "from llama_index.embeddings.google_genai import GoogleGenAIEmbedding\n",
+    "\n",
+    "Settings.llm = GoogleGenAI(model=\"gemini-1.5-flash\")\n",
+    "Settings.embed_model = GoogleGenAIEmbedding(model_name=\"models/text-embedding-004\")\n",
+    "\n",
+    "documents = SimpleDirectoryReader(\"data\").load_data()\n",
+    "index = VectorStoreIndex.from_documents(documents)\n",
+    "query_engine = index.as_query_engine()\n",
+    "\n",
+    "response = query_engine.query(\"What is Machine Learning?\")\n",
+    "print(response)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4f94cfd1-50f9-4c3f-9030-aa9565d3c056",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "!{sys.executable} -m pip install google-generativeai"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "971b4316-d1f9-444d-90a3-08a5d521bb38",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import google.generativeai as genai\n",
+    "genai.configure(api_key=\"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\")\n",
+    "\n",
+    "text=\"Artificial Intelligence is transforming the world.Machine Learning is a subset of AI.\"\n",
+    "\n",
+    "model=genai.GenerativeModel(\"gemini-1.5-flash\")\n",
+    "response=model.generate_content(f\"Based on this text:{text}\\n\\nAnswer:What is Machine Learning?\")\n",
+    "print(response.text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7231389f-6f0d-4c39-b5df-72cbdfc47df1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "!{sys.executable} -m pip install google-genai"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "520a9a48-b59e-4cdb-9a75-3740fb6535b0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from google import genai\n",
+    "client = genai.Client(api_key=\"AIzaSyCrIXOJ9P54dSpNIoVtX-VFip_8Mu-unhk\")\n",
+    "text=\"Artificial Intelligence is transforming the world.Machine Learning is a subset of AI.\"\n",
+    "\n",
+    "response = client.models.generate_content(\n",
+    "    model=\"gemini-1.5-flash\",\n",
+    "    contents=f\"Based on this text:{text}\\n\\nAnswer:What is Machine Learning?\"\n",
+    ")\n",
+    "print(response.text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ccfd3287-416c-42a2-9356-48c15ee1d44a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from google import genai\n",
+    "client = genai.Client(api_key=\"AIzaSyASNhRBreyH0KKmiXaAf-Ugaa56GWKrlrw\")\n",
+    "\n",
+    "text =\"Artificial Intelligence is transforming the world. Machine Learning is a subset of AI.\"\n",
+    "\n",
+    "response=client.models.generate_content(\n",
+    "    model=\"gemini-2.0-flash\",\n",
+    "    contents=f\"Based on this text:{text}\\n\\nAnswer:What is Machine Learning?\"\n",
+    ")\n",
+    "print(response.text)\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "921f20e7-d37d-4600-970a-116a2dde9ac7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "print(sys.executable)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "549820fb-7a48-492e-93f0-9e99c4ba77ce",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "print(sys.executable)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7f8e2e13-4318-472b-9056-2ea8a7c7ef59",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "print(sys.executable)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f8fcb8fa-e028-45dd-9ef9-cacb201fec7b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import subprocess, sys\n",
+    "subprocess.run([sys.executable, \"-m\", \"pip\", \"install\",\n",
+    "\"langchain\", \"langchain-community\", \"chromadb\", \n",
+    "\"openai\", \"tiktoken\", \"python-dotenv\", \"google-generativeai\"],\n",
+    "capture_output=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c4cde5e8-3905-4785-8bb4-e0295bc6c271",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "RAG Project (.venv)",
+   "language": "python",
+   "name": "rag-venv"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

@@ -1,0 +1,5 @@
+house_id,owner,trees_cut,tree_age_cut,country,current_tree_count
+V001,Ramesh,1,12,India,3
+V002,Suresh,1,5,India,1
+V003,Carlos,2,10,Brazil,3
+V004,Sophie,1,11,France,2

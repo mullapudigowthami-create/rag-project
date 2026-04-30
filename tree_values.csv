@@ -1,0 +1,5 @@
+tree_type,growth_rate,timber_value_10yr_inr,medicinal_value,temperature_reduction_celsius,maintenance_level,recommended_distance_meters
+Neem,Fast,25000,Very High,2.5,Low,8
+Teak,Medium,150000,Medium,2.0,Low,10
+Banyan,Slow,50000,High,3.5,Low,12
+Peepal,Medium,35000,Very High,3.0,Low,10
